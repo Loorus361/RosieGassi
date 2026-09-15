@@ -24,7 +24,7 @@ swift test --package-path RosieCore --scratch-path /tmp/RosieGassi-Core
 
 ## Geräteupdate — nur nach gesondertem Auftrag
 
-App **Rosie Gassi**, Bundle `de.carlosanderssohn.RosieGassi`, Extension `de.carlosanderssohn.RosieGassi.LiveActivity`, bestehendes Team `U8257B63WL`. Version 0.1.0, Build 13 für beide Targets in `project.yml`. Auf Fred zuletzt nachgewiesen: Build 12. IDs, Team und Datenformat für ein datenerhaltendes Update erhalten.
+App **Rosie Gassi**, Bundle `de.carlosanderssohn.RosieGassi`, Extension `de.carlosanderssohn.RosieGassi.LiveActivity`, bestehendes Team `U8257B63WL`. Version 0.1.0, Build 13 für beide Targets in `project.yml`. Auf Fred nachgewiesen: 0.1.0, Build 13 (Geräte-Metadaten vom 15.09.2026). IDs, Team und Datenformat für ein datenerhaltendes Update erhalten.
 
 ```sh
 xcodebuild build -project RosieGassi.xcodeproj -scheme RosieGassi \

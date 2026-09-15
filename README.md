@@ -4,7 +4,7 @@ Native, private iPhone-App für Gassi- und Mobilitätsbeobachtungen: Runden star
 
 Die App speichert offline mit SwiftData. JSON-Vollbackup/Restore, standortfreier Export und CSV dienen der bewussten Datenübergabe. Kein Server und keine KI-Laufzeit erforderlich. Die bisherige CSV bleibt bis zur ausdrücklichen Umstiegsfreigabe kanonisch.
 
-**Aktueller Quellstand: 0.1.0, Build 13; iOS 26.0+. Auf Fred zuletzt nachgewiesen: Build 12.** Das ist keine Aussage über eine neue Geräteinstallation.
+**Aktueller Quellstand: 0.1.0, Build 13; iOS 26.0+. Auf Fred nachgewiesen: 0.1.0, Build 13 (Geräte-Metadaten vom 15.09.2026).** Wetterabruf draußen, Akkuverhalten und App-Wechsel funktionieren laut Carlos im Alltag.
 
 ## Aufbau und Einstieg
 
