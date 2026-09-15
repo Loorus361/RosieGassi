@@ -1,0 +1,621 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0C6DCE317FB103759B95CEE8 /* GPSCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D45CC423C35E2CB223939884 /* GPSCoordinator.swift */; };
+		0F3B6FEFB17503F1818E06F1 /* RosieCore in Frameworks */ = {isa = PBXBuildFile; productRef = 41AE048CDECE39C69358C139 /* RosieCore */; };
+		1143B03355705EC047C3BF48 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44C731950C4DDEA4791CF5F6 /* WidgetKit.framework */; };
+		17866052B8DA18960424A971 /* RosieGassiLiveActivity.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CCF68347E3E98997E1EC8F5D /* RosieGassiLiveActivity.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		19F86D797C3B949E05F13241 /* WalkScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB0FE716B74BC9B8A53F4A3 /* WalkScreen.swift */; };
+		2A426F67246C7E5CF8B16249 /* DataScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61E0C12CC6FBC485C5933F7 /* DataScreen.swift */; };
+		2E0A85408B34AC3D08B32ADE /* UITestTransferFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF226EF7DC6E4C7A6CFBCBAD /* UITestTransferFixtures.swift */; };
+		2F61A198362CC3B05A6EAC5E /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F65B379475E430480A1B253E /* SwiftUI.framework */; };
+		369EBE577BD54F1CABA381DE /* WalkActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FEBF94100457979E5895BB /* WalkActivityAttributes.swift */; };
+		389288CE0BF83FD44D5635B2 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031472F96EBA40187C3EFA10 /* RootView.swift */; };
+		3E22B546929AB931845FE32E /* EvaluationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9388A8DC37D65881B0B3A9F /* EvaluationScreen.swift */; };
+		473647DA6127C3551C832327 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1741CEDA0A7A6EEC9A3D0516 /* Assets.xcassets */; };
+		4F624C40FE3B975FC9B43AFE /* CustomFieldControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = F713D465E0C54B386DD5EA35 /* CustomFieldControls.swift */; };
+		6038DE72B656637AB5F6CABF /* LiveActivityCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F953E10E3BFBEAC41C4A7325 /* LiveActivityCoordinator.swift */; };
+		60A373E78EF0B6C57D94091F /* WalkActivityAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FEBF94100457979E5895BB /* WalkActivityAttributes.swift */; };
+		7086D7432AC5B78B8BB77A65 /* QuickNoteSettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6318F14BDACE527BE3D2A751 /* QuickNoteSettingsSection.swift */; };
+		7568D7A76A0E77B48F8CD72B /* EvaluationChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446C666CD618EABB89454511 /* EvaluationChart.swift */; };
+		78DF3349D2CA572382CBF69B /* RosieGassiLiveActivityBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BECCEAC96241E60F9BDA50 /* RosieGassiLiveActivityBundle.swift */; };
+		899699473AFA6865C7774A64 /* RosieRuntime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9317D1433B09DBE5FFF79040 /* RosieRuntime.swift */; };
+		8A6D5D277E5F4B5088C2DD05 /* WalkActivityIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29380E9FD46D062C293EEA6A /* WalkActivityIntents.swift */; };
+		90D04776A5F2A70A05F17E92 /* LiveActivitySessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11458604712FDA39219422C /* LiveActivitySessionStore.swift */; };
+		9126F22709DE1CFBEC4E97E7 /* RestoreScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154C77017A3AD2291ED31AC6 /* RestoreScreen.swift */; };
+		9A3D8CE733DDD70DCD6B095A /* WalkActivityIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29380E9FD46D062C293EEA6A /* WalkActivityIntents.swift */; };
+		9BB3C4DDB5D83FFCFC7E2861 /* WalkActivityLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DCECAA657F507F559F6CD52 /* WalkActivityLiveActivity.swift */; };
+		9E786363DC2753418C17B426 /* RosieActiveWalkLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E7D7949B86249261EEADF8 /* RosieActiveWalkLink.swift */; };
+		A8C49C5BEC966CFF1F5417B8 /* ObservationControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C148E9B5FEAD157FBE8E9D7 /* ObservationControls.swift */; };
+		ABBC1BF1A8F6D80711FC24DB /* EvaluationMetricsCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D8ECC5CD8C136DFD59A8F3 /* EvaluationMetricsCards.swift */; };
+		B14890FB32699E6C6765BF64 /* RosieGassiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB333D463AB5595C93A8D62 /* RosieGassiApp.swift */; };
+		B3D160341DA03CB03E46FC94 /* RouteCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B4542F144444E9C82E70D8 /* RouteCard.swift */; };
+		D2FE553E453FA9DCEF56B151 /* WeatherCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E3DE3BD49E8B02E4B263A8 /* WeatherCoordinator.swift */; };
+		DC5B52B56C9EDAF8404AAC68 /* QuickNotePreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCFFB40ADB8A5C49685435B /* QuickNotePreferences.swift */; };
+		DE8BCCA800DB482F26A9E48D /* WeatherCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D2675F9F1382E7F061887B /* WeatherCard.swift */; };
+		E90D0616D89F1F039D674E8B /* EvaluationMetricsPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A74B62CADE93101701AB33 /* EvaluationMetricsPreferences.swift */; };
+		FFA90FCA851E8C8AB42A0E61 /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE6EE8E2A472DC13F5B205F /* SettingsScreen.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7D9E1215077B545D63F1E732 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20E8962012F005046B717EFF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 03EDF9B727FDC22CB6F1DAB4;
+			remoteInfo = RosieGassiLiveActivity;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		522DC8B24FDA4640502F86E6 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				17866052B8DA18960424A971 /* RosieGassiLiveActivity.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		031472F96EBA40187C3EFA10 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		154C77017A3AD2291ED31AC6 /* RestoreScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreScreen.swift; sourceTree = "<group>"; };
+		1741CEDA0A7A6EEC9A3D0516 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		18B4542F144444E9C82E70D8 /* RouteCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteCard.swift; sourceTree = "<group>"; };
+		20BECCEAC96241E60F9BDA50 /* RosieGassiLiveActivityBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RosieGassiLiveActivityBundle.swift; sourceTree = "<group>"; };
+		29380E9FD46D062C293EEA6A /* WalkActivityIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkActivityIntents.swift; sourceTree = "<group>"; };
+		39C57EA76F697FC8AA243EE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		3DCECAA657F507F559F6CD52 /* WalkActivityLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkActivityLiveActivity.swift; sourceTree = "<group>"; };
+		446C666CD618EABB89454511 /* EvaluationChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationChart.swift; sourceTree = "<group>"; };
+		44C731950C4DDEA4791CF5F6 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		52D2675F9F1382E7F061887B /* WeatherCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCard.swift; sourceTree = "<group>"; };
+		60FEBF94100457979E5895BB /* WalkActivityAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkActivityAttributes.swift; sourceTree = "<group>"; };
+		6318F14BDACE527BE3D2A751 /* QuickNoteSettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickNoteSettingsSection.swift; sourceTree = "<group>"; };
+		63D1A959B15BD36671017081 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		79DF5B35EB5FBE0583A95176 /* RosieCore */ = {isa = PBXFileReference; lastKnownFileType = folder; name = RosieCore; path = RosieCore; sourceTree = SOURCE_ROOT; };
+		7C148E9B5FEAD157FBE8E9D7 /* ObservationControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservationControls.swift; sourceTree = "<group>"; };
+		82D8ECC5CD8C136DFD59A8F3 /* EvaluationMetricsCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationMetricsCards.swift; sourceTree = "<group>"; };
+		90E7D7949B86249261EEADF8 /* RosieActiveWalkLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RosieActiveWalkLink.swift; sourceTree = "<group>"; };
+		9317D1433B09DBE5FFF79040 /* RosieRuntime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RosieRuntime.swift; sourceTree = "<group>"; };
+		A11458604712FDA39219422C /* LiveActivitySessionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivitySessionStore.swift; sourceTree = "<group>"; };
+		ACB333D463AB5595C93A8D62 /* RosieGassiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RosieGassiApp.swift; sourceTree = "<group>"; };
+		B61E0C12CC6FBC485C5933F7 /* DataScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataScreen.swift; sourceTree = "<group>"; };
+		BFB0FE716B74BC9B8A53F4A3 /* WalkScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkScreen.swift; sourceTree = "<group>"; };
+		CCF68347E3E98997E1EC8F5D /* RosieGassiLiveActivity.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = RosieGassiLiveActivity.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF226EF7DC6E4C7A6CFBCBAD /* UITestTransferFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestTransferFixtures.swift; sourceTree = "<group>"; };
+		CFCFFB40ADB8A5C49685435B /* QuickNotePreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickNotePreferences.swift; sourceTree = "<group>"; };
+		D45CC423C35E2CB223939884 /* GPSCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSCoordinator.swift; sourceTree = "<group>"; };
+		D5A74B62CADE93101701AB33 /* EvaluationMetricsPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationMetricsPreferences.swift; sourceTree = "<group>"; };
+		DC60DB860DD9196F40C0D2FF /* RosieGassi.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = RosieGassi.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F65B379475E430480A1B253E /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		F713D465E0C54B386DD5EA35 /* CustomFieldControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFieldControls.swift; sourceTree = "<group>"; };
+		F8E3DE3BD49E8B02E4B263A8 /* WeatherCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCoordinator.swift; sourceTree = "<group>"; };
+		F9388A8DC37D65881B0B3A9F /* EvaluationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationScreen.swift; sourceTree = "<group>"; };
+		F953E10E3BFBEAC41C4A7325 /* LiveActivityCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityCoordinator.swift; sourceTree = "<group>"; };
+		FCE6EE8E2A472DC13F5B205F /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		74E428983F45943D41315865 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0F3B6FEFB17503F1818E06F1 /* RosieCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C6D2F2C712D4A55822B9CCB3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1143B03355705EC047C3BF48 /* WidgetKit.framework in Frameworks */,
+				2F61A198362CC3B05A6EAC5E /* SwiftUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0284B480DE008761675ACFD5 /* RosieGassiLiveActivity */ = {
+			isa = PBXGroup;
+			children = (
+				39C57EA76F697FC8AA243EE3 /* Info.plist */,
+				20BECCEAC96241E60F9BDA50 /* RosieGassiLiveActivityBundle.swift */,
+				3DCECAA657F507F559F6CD52 /* WalkActivityLiveActivity.swift */,
+			);
+			path = RosieGassiLiveActivity;
+			sourceTree = "<group>";
+		};
+		139FFBA15230AFAC026AFEB9 /* RosieGassi */ = {
+			isa = PBXGroup;
+			children = (
+				1741CEDA0A7A6EEC9A3D0516 /* Assets.xcassets */,
+				F713D465E0C54B386DD5EA35 /* CustomFieldControls.swift */,
+				B61E0C12CC6FBC485C5933F7 /* DataScreen.swift */,
+				446C666CD618EABB89454511 /* EvaluationChart.swift */,
+				82D8ECC5CD8C136DFD59A8F3 /* EvaluationMetricsCards.swift */,
+				D5A74B62CADE93101701AB33 /* EvaluationMetricsPreferences.swift */,
+				F9388A8DC37D65881B0B3A9F /* EvaluationScreen.swift */,
+				D45CC423C35E2CB223939884 /* GPSCoordinator.swift */,
+				63D1A959B15BD36671017081 /* Info.plist */,
+				F953E10E3BFBEAC41C4A7325 /* LiveActivityCoordinator.swift */,
+				A11458604712FDA39219422C /* LiveActivitySessionStore.swift */,
+				7C148E9B5FEAD157FBE8E9D7 /* ObservationControls.swift */,
+				CFCFFB40ADB8A5C49685435B /* QuickNotePreferences.swift */,
+				6318F14BDACE527BE3D2A751 /* QuickNoteSettingsSection.swift */,
+				154C77017A3AD2291ED31AC6 /* RestoreScreen.swift */,
+				031472F96EBA40187C3EFA10 /* RootView.swift */,
+				90E7D7949B86249261EEADF8 /* RosieActiveWalkLink.swift */,
+				ACB333D463AB5595C93A8D62 /* RosieGassiApp.swift */,
+				9317D1433B09DBE5FFF79040 /* RosieRuntime.swift */,
+				18B4542F144444E9C82E70D8 /* RouteCard.swift */,
+				FCE6EE8E2A472DC13F5B205F /* SettingsScreen.swift */,
+				CF226EF7DC6E4C7A6CFBCBAD /* UITestTransferFixtures.swift */,
+				BFB0FE716B74BC9B8A53F4A3 /* WalkScreen.swift */,
+				52D2675F9F1382E7F061887B /* WeatherCard.swift */,
+				F8E3DE3BD49E8B02E4B263A8 /* WeatherCoordinator.swift */,
+				5A6160C0330ECF2EAEA41760 /* LiveActivityShared */,
+			);
+			path = RosieGassi;
+			sourceTree = "<group>";
+		};
+		31ECE13A28EE75BEA68B9657 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F65B379475E430480A1B253E /* SwiftUI.framework */,
+				44C731950C4DDEA4791CF5F6 /* WidgetKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5A6160C0330ECF2EAEA41760 /* LiveActivityShared */ = {
+			isa = PBXGroup;
+			children = (
+				60FEBF94100457979E5895BB /* WalkActivityAttributes.swift */,
+				29380E9FD46D062C293EEA6A /* WalkActivityIntents.swift */,
+			);
+			path = LiveActivityShared;
+			sourceTree = "<group>";
+		};
+		A6139CD331F279AE4CC2A81B /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				79DF5B35EB5FBE0583A95176 /* RosieCore */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		B5D67303A693B34564F0B90A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DC60DB860DD9196F40C0D2FF /* RosieGassi.app */,
+				CCF68347E3E98997E1EC8F5D /* RosieGassiLiveActivity.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FF631BF80A70D44044090221 = {
+			isa = PBXGroup;
+			children = (
+				A6139CD331F279AE4CC2A81B /* Packages */,
+				139FFBA15230AFAC026AFEB9 /* RosieGassi */,
+				0284B480DE008761675ACFD5 /* RosieGassiLiveActivity */,
+				31ECE13A28EE75BEA68B9657 /* Frameworks */,
+				B5D67303A693B34564F0B90A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		03EDF9B727FDC22CB6F1DAB4 /* RosieGassiLiveActivity */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AF5474CF8174AE9003DBB0B3 /* Build configuration list for PBXNativeTarget "RosieGassiLiveActivity" */;
+			buildPhases = (
+				CD3AC87BA21FC4EB232E3EAA /* Sources */,
+				C6D2F2C712D4A55822B9CCB3 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RosieGassiLiveActivity;
+			packageProductDependencies = (
+			);
+			productName = RosieGassiLiveActivity;
+			productReference = CCF68347E3E98997E1EC8F5D /* RosieGassiLiveActivity.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		ABA3D443786E74C359959264 /* RosieGassi */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 23DFFFA6609F33BBDC32BE99 /* Build configuration list for PBXNativeTarget "RosieGassi" */;
+			buildPhases = (
+				7079FB466F1F7B3212CD31A6 /* Sources */,
+				FABEE0BBB0130DC6D653E6FD /* Resources */,
+				74E428983F45943D41315865 /* Frameworks */,
+				522DC8B24FDA4640502F86E6 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FEDC8ACE7DF5D9CC148000A1 /* PBXTargetDependency */,
+			);
+			name = RosieGassi;
+			packageProductDependencies = (
+				41AE048CDECE39C69358C139 /* RosieCore */,
+			);
+			productName = RosieGassi;
+			productReference = DC60DB860DD9196F40C0D2FF /* RosieGassi.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		20E8962012F005046B717EFF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					03EDF9B727FDC22CB6F1DAB4 = {
+						ProvisioningStyle = Automatic;
+					};
+					ABA3D443786E74C359959264 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 53B6E0FA3741C0C5E8E9E417 /* Build configuration list for PBXProject "RosieGassi" */;
+			developmentRegion = de;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				de,
+			);
+			mainGroup = FF631BF80A70D44044090221;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				476B59DDE904BBEF5173628F /* XCLocalSwiftPackageReference "RosieCore" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = B5D67303A693B34564F0B90A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ABA3D443786E74C359959264 /* RosieGassi */,
+				03EDF9B727FDC22CB6F1DAB4 /* RosieGassiLiveActivity */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FABEE0BBB0130DC6D653E6FD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				473647DA6127C3551C832327 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7079FB466F1F7B3212CD31A6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F624C40FE3B975FC9B43AFE /* CustomFieldControls.swift in Sources */,
+				2A426F67246C7E5CF8B16249 /* DataScreen.swift in Sources */,
+				7568D7A76A0E77B48F8CD72B /* EvaluationChart.swift in Sources */,
+				ABBC1BF1A8F6D80711FC24DB /* EvaluationMetricsCards.swift in Sources */,
+				E90D0616D89F1F039D674E8B /* EvaluationMetricsPreferences.swift in Sources */,
+				3E22B546929AB931845FE32E /* EvaluationScreen.swift in Sources */,
+				0C6DCE317FB103759B95CEE8 /* GPSCoordinator.swift in Sources */,
+				6038DE72B656637AB5F6CABF /* LiveActivityCoordinator.swift in Sources */,
+				90D04776A5F2A70A05F17E92 /* LiveActivitySessionStore.swift in Sources */,
+				A8C49C5BEC966CFF1F5417B8 /* ObservationControls.swift in Sources */,
+				DC5B52B56C9EDAF8404AAC68 /* QuickNotePreferences.swift in Sources */,
+				7086D7432AC5B78B8BB77A65 /* QuickNoteSettingsSection.swift in Sources */,
+				9126F22709DE1CFBEC4E97E7 /* RestoreScreen.swift in Sources */,
+				389288CE0BF83FD44D5635B2 /* RootView.swift in Sources */,
+				9E786363DC2753418C17B426 /* RosieActiveWalkLink.swift in Sources */,
+				B14890FB32699E6C6765BF64 /* RosieGassiApp.swift in Sources */,
+				899699473AFA6865C7774A64 /* RosieRuntime.swift in Sources */,
+				B3D160341DA03CB03E46FC94 /* RouteCard.swift in Sources */,
+				FFA90FCA851E8C8AB42A0E61 /* SettingsScreen.swift in Sources */,
+				2E0A85408B34AC3D08B32ADE /* UITestTransferFixtures.swift in Sources */,
+				60A373E78EF0B6C57D94091F /* WalkActivityAttributes.swift in Sources */,
+				8A6D5D277E5F4B5088C2DD05 /* WalkActivityIntents.swift in Sources */,
+				19F86D797C3B949E05F13241 /* WalkScreen.swift in Sources */,
+				DE8BCCA800DB482F26A9E48D /* WeatherCard.swift in Sources */,
+				D2FE553E453FA9DCEF56B151 /* WeatherCoordinator.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CD3AC87BA21FC4EB232E3EAA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				78DF3349D2CA572382CBF69B /* RosieGassiLiveActivityBundle.swift in Sources */,
+				369EBE577BD54F1CABA381DE /* WalkActivityAttributes.swift in Sources */,
+				9A3D8CE733DDD70DCD6B095A /* WalkActivityIntents.swift in Sources */,
+				9BB3C4DDB5D83FFCFC7E2861 /* WalkActivityLiveActivity.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FEDC8ACE7DF5D9CC148000A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 03EDF9B727FDC22CB6F1DAB4 /* RosieGassiLiveActivity */;
+			targetProxy = 7D9E1215077B545D63F1E732 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		437744272E1C1F98635D07BF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				INFOPLIST_FILE = RosieGassiLiveActivity/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = de.carlosanderssohn.RosieGassi.LiveActivity;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		696B5DAEAE779E8C677633A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 13;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		6D2F003333F76CFC6AF5B3D9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = RosieGassi/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Rosie Gassi";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = de.carlosanderssohn.RosieGassi;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8411E893BE2A50C985341DDB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = RosieGassi/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Rosie Gassi";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = de.carlosanderssohn.RosieGassi;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		C5A80873935F20B6FD3480E3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 13;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		D8A4389FDB5E0E60D6EAEF1E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				INFOPLIST_FILE = RosieGassiLiveActivity/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = de.carlosanderssohn.RosieGassi.LiveActivity;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		23DFFFA6609F33BBDC32BE99 /* Build configuration list for PBXNativeTarget "RosieGassi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6D2F003333F76CFC6AF5B3D9 /* Debug */,
+				8411E893BE2A50C985341DDB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		53B6E0FA3741C0C5E8E9E417 /* Build configuration list for PBXProject "RosieGassi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				696B5DAEAE779E8C677633A2 /* Debug */,
+				C5A80873935F20B6FD3480E3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		AF5474CF8174AE9003DBB0B3 /* Build configuration list for PBXNativeTarget "RosieGassiLiveActivity" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				437744272E1C1F98635D07BF /* Debug */,
+				D8A4389FDB5E0E60D6EAEF1E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		476B59DDE904BBEF5173628F /* XCLocalSwiftPackageReference "RosieCore" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = RosieCore;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		41AE048CDECE39C69358C139 /* RosieCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RosieCore;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 20E8962012F005046B717EFF /* Project object */;
+}
