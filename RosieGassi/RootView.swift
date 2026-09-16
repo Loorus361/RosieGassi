@@ -40,6 +40,7 @@ struct RootView: View {
                 SettingsScreen(store: store)
             }
         }
+        .tabBarMinimizeBehavior(.onScrollDown)
         .onAppear { gps.setForeground(scenePhase == .active) }
         .onChange(of: scenePhase) { _, phase in gps.setForeground(phase == .active) }
         .onChange(of: store.activeWalk) { _, walk in
