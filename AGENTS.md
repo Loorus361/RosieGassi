@@ -1,6 +1,6 @@
 # Rosie Gassi
 
-Native SwiftUI-iPhone-App für Carlos und Rosie. Runden starten, pausieren und beenden; Motivation, Lahmheit, Stationen, Notizen und eigene Felder erfassen. Optional GPS-Route, Wetter beim Start, Verlauf, Auswertung und Live Activity. Speichert offline mit SwiftData. Kein Server, keine KI-Laufzeit. Stand 0.1.0, Build 13; Deployment Target iOS 26.0. Oberfläche auf Deutsch.
+Native SwiftUI-iPhone-App für Carlos und Rosie. Runden starten, pausieren und beenden; Motivation, Lahmheit, Stationen, Notizen und eigene Felder erfassen. Optional GPS-Route, Wetter beim Start, Verlauf, Auswertung und Live Activity. Speichert offline mit SwiftData. Kein Server, keine KI-Laufzeit. Stand 0.1.0, Build 14; Deployment Target iOS 26.0. Oberfläche auf Deutsch.
 
 RosieCore enthält Datenmodell, Speicherung, Auswertung und die Backup-/Restore-Tests. RosieGassi ist die SwiftUI-App. RosieGassiLiveActivity ist die Widget-Extension und liest keinen Store, startet kein GPS und geht nicht ins Netz. project.yml ist die XcodeGen-Quelle; nach Änderungen daran im Projektordner `xcodegen generate` ausführen. Einstieg: README.md. Datenregeln: docs/DATENVERTRAG.md. Buildbefehle: docs/BUILD.md.
 

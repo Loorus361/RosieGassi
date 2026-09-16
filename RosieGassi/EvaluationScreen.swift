@@ -1,26 +1,32 @@
 import SwiftUI
 import RosieCore
 
-/// Tab „Auswertung“: gemeinsame Filter (Kalenderzeitraum und Tageszeit) sowie das
-/// Verlaufsdiagramm. Diagramm und Kennzahlen erhalten exakt denselben gefilterten Bestand.
 struct EvaluationScreen: View {
     let store: WalkStore
     @Environment(GPSCoordinator.self) private var gps
     @State private var filter = EvaluationFilter(anchor: Date())
-    @State private var selectedRoundID: UUID?
+    @State private var selectedMetrics = EvaluationChartPreferences().selection
+    @State private var aggregation: EvaluationAggregation = EvaluationChartPreferences().daily ? .day : .round
+    @State private var selection: Date?
+    @State private var editor: MetricEditorDestination?
+
+    private struct MetricEditorDestination: Identifiable {
+        let id = UUID()
+    }
 
     var body: some View {
+        let result = evaluation
         NavigationStack {
             ScrollView {
-                VStack(alignment: .leading, spacing: 20) {
+                VStack(alignment: .leading, spacing: 16) {
                     filterCard
-                    if result.isEmpty {
-                        emptyCard
-                    } else {
-                        chartCard
-                        detailCard
-                        valuesCard
-                        EvaluationMetricsSection(metrics: result.metrics)
+                    chartCard(result)
+                    if let selection { detailCard(result, at: selection) }
+                    if !result.rounds.isEmpty {
+                        valuesCard(result)
+                        EvaluationMetricsSection(metrics: WalkEvaluation.evaluate(
+                            store.walks, filter: filter, routeProfile: gps.routeFilter
+                        ).metrics)
                     }
                 }
                 .padding(20)
@@ -30,322 +36,211 @@ struct EvaluationScreen: View {
             .navigationDestination(for: UUID.self) { id in
                 WalkScreen(store: store, walkID: id)
             }
+            .sheet(item: $editor) { _ in
+                EvaluationValuePicker(descriptors: available, selection: $selectedMetrics)
+            }
         }
-        // Ein Filterwechsel darf keine Runde aus einem anderen Zeitraum ausgewählt lassen.
-        .onChange(of: filter) { _, _ in selectedRoundID = nil }
+        .onChange(of: filter) { _, _ in selection = nil }
+        .onChange(of: aggregation) { _, new in
+            selection = nil
+            EvaluationChartPreferences().save(daily: new == .day)
+        }
+        .onChange(of: selectedMetrics) { _, new in
+            selection = nil
+            EvaluationChartPreferences().save(selection: new)
+        }
     }
 
-    /// Gemeinsamer gefilterter Datenbestand für Diagramm und Kennzahlen.
-    private var result: EvaluationResult {
-        WalkEvaluation.evaluate(store.walks, filter: filter, routeProfile: gps.routeFilter)
+    private var available: [EvaluationMetricDescriptor] {
+        FlexibleWalkEvaluation.availableMetrics(in: store.walks, customFieldCatalog: store.fieldCatalog)
     }
 
-    private var selectedRound: EvaluationRound? {
-        selectedRoundID.flatMap { result.round($0) }
+    private var evaluation: FlexibleEvaluationResult {
+        FlexibleWalkEvaluation.evaluate(store.walks, filter: filter, metrics: selectedMetrics,
+            aggregation: aggregation, customFieldCatalog: store.fieldCatalog, routeProfile: gps.routeFilter)
     }
-
-    // MARK: - Filter
 
     private var filterCard: some View {
         RuheCard {
-            VStack(alignment: .leading, spacing: 18) {
-                Picker("Zeitraum", selection: periodBinding) {
+            VStack(alignment: .leading, spacing: 12) {
+                Picker("Zeitraum", selection: Binding(get: { filter.period }, set: { filter.setPeriod($0) })) {
                     ForEach(EvaluationPeriod.allCases, id: \.self) { period in
-                        Text(period.displayName).tag(period)
+                        Text(period == .day ? "Tag" : period == .week ? "Woche" : "Monat").tag(period)
                     }
                 }
                 .pickerStyle(.segmented)
                 .accessibilityIdentifier("evaluation.period")
 
-                HStack(spacing: 12) {
-                    Button {
-                        filter.goPrevious()
-                    } label: {
-                        Image(systemName: "chevron.left")
-                    }
-                    .buttonBorderShape(.circle)
-                    .accessibilityIdentifier("evaluation.previous")
-                    .accessibilityLabel("Vorheriger Zeitraum")
-
+                HStack(spacing: 8) {
+                    Button { filter.goPrevious() } label: { Image(systemName: "chevron.left").frame(minWidth: 28, minHeight: 32) }
+                        .accessibilityLabel("Vorheriger Zeitraum")
                     Spacer(minLength: 0)
-
-                    Button("Heute") { filter.goToday() }
-                        .disabled(filter.isCurrentPeriod())
-                        .accessibilityIdentifier("evaluation.today")
-
-                    Spacer(minLength: 0)
-
-                    Button {
-                        filter.goNext()
-                    } label: {
-                        Image(systemName: "chevron.right")
+                    VStack(spacing: 2) {
+                        Text(periodTitle).font(.subheadline.weight(.semibold)).multilineTextAlignment(.center)
+                        if !filter.isCurrentPeriod() {
+                            Button("Heute") { filter.goToday() }.font(.footnote).frame(minHeight: 30)
+                        }
                     }
-                    .buttonBorderShape(.circle)
-                    .accessibilityIdentifier("evaluation.next")
-                    .accessibilityLabel("Nächster Zeitraum")
+                    Spacer(minLength: 0)
+                    Button { filter.goNext() } label: { Image(systemName: "chevron.right").frame(minWidth: 28, minHeight: 32) }
+                        .accessibilityLabel("Nächster Zeitraum")
                 }
                 .buttonStyle(.bordered)
-                .controlSize(.large)
 
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(periodTitle)
-                        .font(.headline)
-                        .accessibilityIdentifier("evaluation.periodTitle")
-                    Text(periodRange)
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                        .accessibilityIdentifier("evaluation.periodRange")
+                Text("Tageszeit").font(.subheadline.weight(.semibold))
+                ViewThatFits(in: .horizontal) {
+                    HStack(spacing: 6) { bucketButtons }
+                    VStack(alignment: .leading, spacing: 6) { bucketButtons }
                 }
-
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Tageszeit")
-                        .font(.subheadline.weight(.semibold))
-                    HStack(spacing: 8) {
-                        ForEach(TimeOfDayBucket.allCases, id: \.self) { bucket in
-                            bucketChip(bucket)
-                        }
-                    }
-                    Text(bucketHint)
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
-                        .accessibilityIdentifier("evaluation.bucketHint")
+                Divider()
+                Picker("Zusammenfassung", selection: $aggregation) {
+                    Text("Einzelne Runden").tag(EvaluationAggregation.round)
+                    Text("Tagesdurchschnitt").tag(EvaluationAggregation.day)
                 }
+                .pickerStyle(.segmented)
+                .accessibilityIdentifier("evaluation.aggregation")
             }
         }
     }
 
-    private var periodBinding: Binding<EvaluationPeriod> {
-        Binding(
-            get: { filter.period },
-            set: { filter.setPeriod($0) }
-        )
-    }
-
-    private func bucketChip(_ bucket: TimeOfDayBucket) -> some View {
-        let isSelected = filter.buckets.contains(bucket)
-        let isLastSelected = isSelected && filter.buckets.count == 1
-        return Button {
-            filter.toggle(bucket)
-        } label: {
-            HStack(spacing: 6) {
-                Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
-                    .accessibilityHidden(true)
-                Text(bucket.displayName)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.8)
+    @ViewBuilder private var bucketButtons: some View {
+        ForEach(TimeOfDayBucket.allCases, id: \.self) { bucket in
+            let selected = filter.buckets.contains(bucket)
+            Button { filter.toggle(bucket) } label: {
+                Label(bucket.displayName, systemImage: selected ? "checkmark.circle.fill" : "circle")
+                    .font(.subheadline)
+                    .fixedSize()
+                    .frame(maxWidth: .infinity, minHeight: 32)
             }
-            .font(.subheadline)
-            .frame(maxWidth: .infinity, minHeight: 44)
-        }
-        .buttonStyle(.bordered)
-        .tint(isSelected ? Color.accentColor : Color.secondary)
-        .accessibilityIdentifier("evaluation.bucket.\(bucket.rawValue)")
-        .accessibilityLabel("Tageszeit \(bucket.displayName)")
-        .accessibilityValue(isSelected ? "ausgewählt" : "nicht ausgewählt")
-        .accessibilityHint(isLastSelected
-                           ? "Mindestens ein Bereich bleibt ausgewählt."
-                           : "Doppelt aktivieren oder deaktivieren.")
-        .accessibilityAddTraits(isSelected ? [.isSelected] : [])
-    }
-
-    private var bucketHint: String {
-        if filter.isAllBucketsSelected { return "Alle Tageszeiten werden ausgewertet." }
-        if filter.buckets.count == 1 { return "Mindestens ein Bereich bleibt ausgewählt." }
-        return "Die ausgewählten Bereiche werden gemeinsam ausgewertet."
-    }
-
-    // MARK: - Karten
-
-    private var emptyCard: some View {
-        RuheCard {
-            ContentUnavailableView {
-                Label("Keine Runden im Zeitraum", systemImage: "calendar.badge.exclamationmark")
-            } description: {
-                Text("Für \(periodTitle) liegen keine Runden vor. Nutze die Pfeile oder wechsle den Zeitraum.")
-            }
-            .accessibilityIdentifier("evaluation.empty")
+            .buttonStyle(.bordered)
+            .tint(selected ? .accentColor : .secondary)
+            .accessibilityValue(selected ? "ausgewählt" : "nicht ausgewählt")
+            .accessibilityIdentifier("evaluation.bucket.\(bucket.rawValue)")
         }
     }
 
-    private var chartCard: some View {
+    private func chartCard(_ result: FlexibleEvaluationResult) -> some View {
         RuheCard {
             VStack(alignment: .leading, spacing: 14) {
-                Text("Verlauf: Motivation und Lahmheit")
-                    .font(.headline)
-                if hasScores {
-                    EvaluationChart(result: result, selection: chartSelection, selectedRoundID: selectedRound?.id)
-                        .frame(height: 240)
-                    EvaluationLegend()
-                    Text("Tippe auf einen Punkt für Details.")
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
-                } else {
-                    ContentUnavailableView {
-                        Label("Keine Bewertungen", systemImage: "chart.line.uptrend.xyaxis")
-                    } description: {
-                        Text("Für \(periodTitle) liegen keine Motivation- oder Lahmheit-Werte vor. Fehlende Werte bleiben leer und werden nicht als 0 dargestellt.")
+                HStack {
+                    Text("Verlauf").font(.headline)
+                    Spacer()
+                    Button { editor = MetricEditorDestination() } label: {
+                        Label("Werte", systemImage: "slider.horizontal.3")
                     }
-                    .accessibilityIdentifier("evaluation.chart.empty")
+                    .buttonStyle(.bordered)
+                    .frame(minHeight: 44)
+                    .accessibilityIdentifier("evaluation.chooseMetrics")
                 }
-            }
-        }
-    }
-
-    @ViewBuilder
-    private var detailCard: some View {
-        if let round = selectedRound {
-            RuheCard {
-                VStack(alignment: .leading, spacing: 12) {
-                    Text("Ausgewählte Runde")
-                        .font(.headline)
-                    EvaluationPointDetail(round: round)
-                }
-            }
-        }
-    }
-
-    private var valuesCard: some View {
-        let scored = result.rounds.filter { $0.hasAnyScore() }
-        return RuheCard {
-            DisclosureGroup {
-                VStack(spacing: 0) {
-                    ForEach(scored) { round in
-                        Button {
-                            selectedRoundID = round.id
-                        } label: {
-                            HStack(spacing: 10) {
-                                HStack(spacing: 2) {
-                                    if round.motivation != nil {
-                                        Image(systemName: EvaluationStyle.symbolName(for: .motivation))
-                                            .foregroundStyle(EvaluationStyle.color(for: .motivation))
-                                    }
-                                    if round.lameness != nil {
-                                        Image(systemName: EvaluationStyle.symbolName(for: .lameness))
-                                            .foregroundStyle(EvaluationStyle.color(for: .lameness))
-                                    }
-                                }
-                                .font(.footnote)
-                                .accessibilityHidden(true)
-                                VStack(alignment: .leading, spacing: 2) {
-                                    Text(rowTitle(for: round))
-                                        .font(.subheadline)
-                                    Text(rowSubtitle(for: round))
-                                        .font(.footnote)
-                                        .foregroundStyle(.secondary)
-                                }
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 145))], alignment: .leading, spacing: 8) {
+                    ForEach(Array(result.series.enumerated()), id: \.element.id) { index, series in
+                        Button { editor = MetricEditorDestination() } label: {
+                            HStack(spacing: 6) {
+                                Image(systemName: index % 2 == 0 ? "circle.fill" : "diamond.fill").font(.caption)
+                                Text(EvaluationValueFormatting.title(series.descriptor)).font(.subheadline)
                                 Spacer(minLength: 0)
-                                if round.id == selectedRound?.id {
-                                    Image(systemName: "checkmark")
-                                        .accessibilityHidden(true)
-                                }
+                                Image(systemName: "chevron.down").font(.caption)
                             }
-                            .frame(minHeight: 44)
-                            .contentShape(Rectangle())
+                            .padding(10)
+                            .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
+                            .background(EvaluationValueFormatting.color(index).opacity(0.1), in: RoundedRectangle(cornerRadius: 14))
                         }
                         .buttonStyle(.plain)
-                        .accessibilityIdentifier("evaluation.round.\(round.id.uuidString)")
-                        .accessibilityLabel(rowAccessibilityLabel(for: round))
-                        .accessibilityAddTraits(round.id == selectedRound?.id ? [.isSelected] : [])
-                        if round.id != scored.last?.id {
-                            Divider()
-                        }
+                        .foregroundStyle(EvaluationValueFormatting.color(index))
                     }
                 }
-                .padding(.top, 6)
-            } label: {
-                // Identifier nur am Label: sonst erben die Zeilenknöpfe ihn und verlieren ihre eigene ID.
-                Text("Werte je Runde (\(scored.count))")
-                    .font(.headline)
-                    .accessibilityIdentifier("evaluation.values")
+                if result.rounds.isEmpty {
+                    ContentUnavailableView("Keine Runden im Zeitraum", systemImage: "calendar.badge.exclamationmark",
+                        description: Text("Wechsle den Zeitraum oder die Tageszeitfilter."))
+                } else {
+                    FlexibleEvaluationChart(result: result, aggregation: aggregation, selection: $selection)
+                    Text(aggregation == .day
+                         ? "Je Punkt: Tagesmittel der ausgewählten Tageszeiten. Ja/Nein: Anteil Ja unter beantworteten Runden."
+                         : "Ein Punkt je Runde. Tippe auf das Diagramm für Werte und Notizen.")
+                        .font(.footnote).foregroundStyle(.secondary)
+                    Text("Fehlende Angaben bleiben leer. Dauer ohne Pausen zieht nur manuelle Pausen ab.")
+                        .font(.footnote).foregroundStyle(.secondary)
+                }
             }
-            .tint(.primary)
         }
     }
 
-    // MARK: - Hilfen
-
-    private var hasScores: Bool {
-        !result.motivationSeries.isEmpty || !result.lamenessSeries.isEmpty
+    private func detailCard(_ result: FlexibleEvaluationResult, at date: Date) -> some View {
+        let points = result.series.flatMap(\.points)
+        let nearest = points.min { abs($0.date.timeIntervalSince(date)) < abs($1.date.timeIntervalSince(date)) }
+        return RuheCard {
+            VStack(alignment: .leading, spacing: 12) {
+                if let nearest {
+                    Text(Self.dateText(nearest.date, time: aggregation == .round)).font(.headline)
+                    ForEach(result.series) { series in
+                        let point = series.points.first { $0.date == nearest.date && (aggregation == .day || $0.roundID == nearest.roundID) }
+                        VStack(alignment: .leading, spacing: 3) {
+                            Text(EvaluationValueFormatting.title(series.descriptor)).font(.subheadline.weight(.semibold))
+                            if let point {
+                                Text(EvaluationValueFormatting.value(point, descriptor: series.descriptor, aggregation: aggregation))
+                                if aggregation == .day {
+                                    Text("\(point.sampleCount) von \(point.totalCount) Runden mit Angabe")
+                                        .font(.caption).foregroundStyle(.secondary)
+                                }
+                            } else {
+                                Text("Nicht angegeben").foregroundStyle(.secondary)
+                            }
+                        }
+                        .accessibilityElement(children: .combine)
+                    }
+                    if let id = nearest.roundID, aggregation == .round {
+                        NavigationLink(value: id) { Label("Runde öffnen", systemImage: "arrow.forward.circle").frame(minHeight: 44) }
+                    } else {
+                        ForEach(result.rounds.filter { EvaluationCalendar.rosie.calendar.isDate($0.startedAt, inSameDayAs: nearest.date) }) { round in
+                            NavigationLink(value: round.id) {
+                                Text("Runde um \(Self.timeFormatter.string(from: round.startedAt)) öffnen").frame(minHeight: 44)
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
-    /// Diagramm-Auswahl wird als stabile Runden-ID gehalten; `nil` bedeutet keine Auswahl.
-    private var chartSelection: Binding<Date?> {
-        Binding(
-            get: { selectedRound?.startedAt },
-            set: { date in
-                guard let date else { selectedRoundID = nil; return }
-                selectedRoundID = result.nearestScoredRound(to: date)?.id
+    private func valuesCard(_ result: FlexibleEvaluationResult) -> some View {
+        RuheCard {
+            DisclosureGroup("Runden im Zeitraum (\(result.rounds.count))") {
+                LazyVStack(alignment: .leading, spacing: 8) {
+                    ForEach(result.rounds) { round in
+                        NavigationLink(value: round.id) {
+                            HStack {
+                                Text(Self.dateText(round.startedAt, time: true))
+                                Spacer()
+                                Image(systemName: "chevron.right").font(.caption)
+                            }.frame(minHeight: 44)
+                        }
+                    }
+                }.padding(.top, 8)
             }
-        )
+            .font(.subheadline)
+        }
     }
 
     private var periodTitle: String {
-        switch filter.period {
-        case .week:
-            let week = EvaluationCalendar.rosie.calendar.component(.weekOfYear, from: filter.interval().start)
-            return "Kalenderwoche \(week)"
-        case .month:
-            return Self.monthFormatter.string(from: filter.interval().start)
-        }
-    }
-
-    private var periodRange: String {
         let interval = filter.interval()
-        // Halboffener Bereich: der letzte Tag gehört noch dazu.
-        let lastDay = interval.end.addingTimeInterval(-1)
-        return "\(Self.shortDateFormatter.string(from: interval.start)) – \(Self.shortDateFormatter.string(from: lastDay))"
-    }
-
-    private func rowTitle(for round: EvaluationRound) -> String {
-        Self.rowDateFormatter.string(from: round.startedAt)
-    }
-
-    private func rowSubtitle(for round: EvaluationRound) -> String {
-        var parts: [String] = []
-        for metric in ScoreMetric.allCases {
-            guard let value = round.score(for: metric) else { continue }
-            parts.append("\(metric.displayName) \(Self.scoreFormatter.string(from: value as NSNumber) ?? "\(value)")")
+        switch filter.period {
+        case .day: return Self.dateText(interval.start, time: false)
+        case .week: return "\(Self.shortFormatter.string(from: interval.start)) – \(Self.shortFormatter.string(from: interval.end.addingTimeInterval(-1)))"
+        case .month: return Self.monthFormatter.string(from: interval.start)
         }
-        parts.append(round.bucket.displayName)
-        return parts.joined(separator: " · ")
     }
 
-    private func rowAccessibilityLabel(for round: EvaluationRound) -> String {
-        var parts = [rowTitle(for: round), rowSubtitle(for: round)]
-        parts.append("Runde öffnen über die Detailkarte")
-        return parts.joined(separator: ", ")
+    private static func dateText(_ date: Date, time: Bool) -> String {
+        (time ? dateTimeFormatter : dateFormatter).string(from: date)
     }
-
-    private static let shortDateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "de_DE")
-        formatter.timeZone = EvaluationCalendar.rosieTimeZone
-        formatter.dateFormat = "d. MMM yyyy"
-        return formatter
-    }()
-
-    private static let monthFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "de_DE")
-        formatter.timeZone = EvaluationCalendar.rosieTimeZone
-        formatter.dateFormat = "MMMM yyyy"
-        return formatter
-    }()
-
-    private static let rowDateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "de_DE")
-        formatter.timeZone = EvaluationCalendar.rosieTimeZone
-        formatter.dateFormat = "EEEE, d. MMM, HH:mm"
-        return formatter
-    }()
-
-    private static let scoreFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.locale = Locale(identifier: "de_DE")
-        formatter.numberStyle = .decimal
-        formatter.minimumFractionDigits = 0
-        formatter.maximumFractionDigits = 1
-        return formatter
-    }()
+    private static func formatter(_ format: String) -> DateFormatter {
+        let f = DateFormatter(); f.locale = Locale(identifier: "de_DE")
+        f.timeZone = EvaluationCalendar.rosieTimeZone; f.dateFormat = format
+        return f
+    }
+    private static let dateTimeFormatter = formatter("EEE, d. MMM · HH:mm")
+    private static let dateFormatter = formatter("EEEE, d. MMMM")
+    private static let shortFormatter = formatter("d. MMM")
+    private static let monthFormatter = formatter("MMMM yyyy")
+    private static let timeFormatter = formatter("HH:mm")
 }

@@ -4,11 +4,13 @@ import Foundation
 ///
 /// Ausdrücklich Kalendergrenzen, **keine** rollierenden Sieben- oder Dreißig-Tage-Intervalle.
 public enum EvaluationPeriod: String, CaseIterable, Codable, Sendable {
+    case day
     case week
     case month
 
     public var displayName: String {
         switch self {
+        case .day: "Tag"
         case .week: "Kalenderwoche"
         case .month: "Kalendermonat"
         }
@@ -17,6 +19,7 @@ public enum EvaluationPeriod: String, CaseIterable, Codable, Sendable {
     /// Kalenderkomponente für Bereichsbildung und Navigation.
     public var component: Calendar.Component {
         switch self {
+        case .day: .day
         case .week: .weekOfYear
         case .month: .month
         }
@@ -59,7 +62,12 @@ public struct EvaluationCalendar: Equatable, Sendable {
         if let interval = calendar.dateInterval(of: period.component, for: date) { return interval }
         // Defensiver Rückfall; für den gregorianischen Kalender praktisch unerreichbar.
         let start = calendar.startOfDay(for: date)
-        let end = calendar.date(byAdding: .day, value: period == .week ? 7 : 31, to: start) ?? start
+        let fallbackDays: Int = switch period {
+        case .day: 1
+        case .week: 7
+        case .month: 31
+        }
+        let end = calendar.date(byAdding: .day, value: fallbackDays, to: start) ?? start
         return DateInterval(start: start, end: end)
     }
 
