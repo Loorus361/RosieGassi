@@ -1,6 +1,6 @@
 # Rosie Gassi
 
-Native, private iPhone-App für Gassi- und Mobilitätsbeobachtungen: Runden starten, pausieren und beenden; Motivation, Lahmheit, Stationen, Notizen und eigene versionierte Felder erfassen. Dazu kommen optionale GPS-Routen mit Karte und geschätzter Strecke, Wetter beim Start, Verlauf, Wochen-/Monatsauswertung und eine Live Activity mit Schnellvermerk.
+Native iPhone-App für Gassi- und Mobilitätsbeobachtungen: Runden starten, pausieren und beenden; Motivation, Lahmheit, Stationen, Notizen und eigene versionierte Felder erfassen. Dazu kommen optionale GPS-Routen mit Karte und geschätzter Strecke, Wetter beim Start, Verlauf, Wochen-/Monatsauswertung und eine Live Activity mit Schnellvermerk.
 
 Die App speichert offline mit SwiftData. JSON-Vollbackup/Restore, standortfreier Export und CSV dienen der bewussten Datenübergabe. Kein Server und keine KI-Laufzeit erforderlich. Die bisherige CSV bleibt bis zur ausdrücklichen Umstiegsfreigabe kanonisch.
 
@@ -24,3 +24,7 @@ Im Tab Auswertung sind Tag, Kalenderwoche und Kalendermonat sowie einzelne Runde
 Zahlen mit kompatiblen Einheiten teilen sich eine Skala. Zwei Einheiten erhalten zwei beschriftete Achsen; weitere Einheiten werden in Diagrammen mit demselben Zeitbereich gezeigt. Ja/Nein erscheint je Runde als Antwort und pro Tag als Anteil Ja unter den beantworteten Runden. Kategorien und Notizen erscheinen als antippbare Markierungen. Eigene Feldversionen bleiben getrennt; fehlende Angaben werden nicht zu Nullwerten.
 
 Für eine isolierte synthetische Vorschau: `--uitest-store <neue UUID> --uitest-evaluation-fixture`. Keine normalen App-Daten verwenden.
+
+## Lizenz
+
+Der Quellcode steht unter der [MIT-Lizenz](LICENSE). Abhängigkeiten behalten ihre jeweiligen Lizenzen.
